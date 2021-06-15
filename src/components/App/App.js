@@ -8,11 +8,22 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      urls: []
+      urls: [],
+      error: ''
     }
   }
 
+
   componentDidMount() {
+    getUrls()
+      .then(urlData => {
+        if(typeof urlData === 'string') {
+          this.setState({ error: urlData })
+        } else {
+          this.setState({ urls: urlData.urls })
+        }
+      })
+      .catch(err => err.message)
   }
 
   render() {
