@@ -20,6 +20,4 @@ describe('Show main view of URL Shortener App', () => {
     cy.contains('h1', 'URL Shortener')
   });
 
-
-
 });
