@@ -41,3 +41,21 @@ describe('Show main view of URL Shortener App', () => {
   });
 
 });
+
+describe('Show main view of URL Shortener App', () => {
+
+  beforeEach(() => {
+    cy.fixture('mockData.json')
+    cy.intercept('POST', 'http://localhost:3001/api/v1/urls', {
+        statusCode: 201,
+        body: JSON.stringify({
+          long_url: 'urlToShorten',
+          short: 'shortenedURL',
+          title: 'test title',
+        })
+      })
+    cy.visit('http://localhost:3000')
+  });
+
+
+});
