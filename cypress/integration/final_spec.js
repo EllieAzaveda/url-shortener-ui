@@ -25,5 +25,9 @@ describe('Show main view of URL Shortener App', () => {
       .get('form').find('[placeholder="URL to Shorten..."]').should('be.visible')
       .get('form').find('button').should('be.visible')
   });
+  
+  it('Should display URL card upon page load', () => {
+    cy.get('section').find(':nth-child(1)').should('be.visible')
+  });
 
 });
