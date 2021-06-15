@@ -14,6 +14,10 @@ export class App extends Component {
   }
 
   componentDidMount() {
+    this.getAllSavedURLs();
+  }
+
+  getAllSavedURLs() {
     getUrls()
       .then(urlData => {
         if(typeof urlData === 'string') {
@@ -28,7 +32,10 @@ export class App extends Component {
   postNewUrl(urlInput){
     postURL(urlInput)
     .then(response =>
-      this.setState({ urls: [...this.state.urls, response]}))
+      this.setState({ urls: [ ...this.state.urls, response ]})
+    )
+    .catch(err => err.message)
+
   }
 
   render() {
