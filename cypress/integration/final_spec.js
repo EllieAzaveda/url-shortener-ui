@@ -20,4 +20,10 @@ describe('Show main view of URL Shortener App', () => {
     cy.contains('h1', 'URL Shortener')
   });
 
+  it('Should display the form and corresponding button', () => {
+    cy.get('form').find('[placeholder="Title..."]').should('be.visible')
+      .get('form').find('[placeholder="URL to Shorten..."]').should('be.visible')
+      .get('form').find('button').should('be.visible')
+  });
+
 });
