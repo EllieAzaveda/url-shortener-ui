@@ -35,4 +35,9 @@ describe('Show main view of URL Shortener App', () => {
       .get('form').find('[placeholder="URL to Shorten..."]').invoke('attr', 'placeholder').should('contain', 'URL to Shorten')
   });
 
+  it('Should be able to type text in the form inputs', () => {
+    cy.get('form').find('[placeholder="Title..."]').type('Test')
+      .get('form').find('[placeholder="URL to Shorten..."]').type('testURL.com/example/wowzers')
+  });
+
 });
