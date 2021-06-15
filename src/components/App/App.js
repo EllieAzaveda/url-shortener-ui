@@ -13,7 +13,6 @@ export class App extends Component {
     }
   }
 
-
   componentDidMount() {
     getUrls()
       .then(urlData => {
@@ -27,14 +26,18 @@ export class App extends Component {
   }
 
   render() {
+    console.log(this.state.urls)
     return (
       <main className="App">
-        <header>
-          <h1>URL Shortener</h1>
-          <UrlForm />
-        </header>
-
-        <UrlContainer urls={this.state.urls}/>
+        <>
+        <h1>URL Shortener</h1>
+        <UrlForm
+          urls={this.state.urls}
+        />
+        <UrlContainer
+          urls={this.state.urls}
+        />
+        </>
       </main>
     );
   }
