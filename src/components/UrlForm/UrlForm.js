@@ -5,10 +5,8 @@ class UrlForm extends Component {
     super();
     this.props = props;
     this.state = {
-      urls: props.urls,
       title: '',
       urlToShorten: '',
-      shortenedURL: ''
     };
   }
 
@@ -35,19 +33,15 @@ class UrlForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-
-    return fetch(`http://localhost:3001/api/v1/urls`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        long_url: this.state.urlToShorten,
-        short: this.shortenURL(this.state.urlToShorten),
-        title: this.state.title,
-      })
-    })
+    let newUrl = {
+      long_url: this.state.urlToShorten,
+      title: this.state.title
+    }
+    if(!this.state.title && !this.state.urlToShorten) {
+      console.log("error")
+    } else {
+      this.props.postNewUrl(newUrl);
+    }
     this.clearInputs();
   }
 

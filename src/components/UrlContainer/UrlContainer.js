@@ -6,9 +6,9 @@ const UrlContainer = ({ urls }) => {
   const urlEls = urls.map(url => {
     return (
       <div className="url" key={url.id}>
-        <h3>{url.title}</h3>
-        <a href={url.short_url} target="blank">{url.short_url}</a>
-        <p>{url.long_url}</p>
+        <h3 data-cy='title'>{url.title}</h3>
+        <a data-cy='short-url' href={url.short_url} target="blank">{url.short_url}</a>
+        <p data-cy='long-url'>{url.long_url}</p>
       </div>
     )
   });

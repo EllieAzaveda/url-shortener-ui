@@ -45,17 +45,32 @@ describe('Show main view of URL Shortener App', () => {
 describe('Show main view of URL Shortener App', () => {
 
   beforeEach(() => {
+
     cy.fixture('mockData.json')
-    cy.intercept('POST', 'http://localhost:3001/api/v1/urls', {
-        statusCode: 201,
-        body: JSON.stringify({
-          long_url: 'urlToShorten',
-          short: 'shortenedURL',
-          title: 'test title',
+      .then(mockData => {
+        cy.intercept('GET', 'http://localhost:3001/api/v1/urls', {
+          statusCode: 200,
+          body: mockData
+        })
+      })
+
+    cy.fixture('postMockdata.json')
+      .then(mockData => {
+        cy.intercept('POST', 'http://localhost:3001/api/v1/urls', {
+          statusCode: 200,
+          body: mockData
         })
       })
     cy.visit('http://localhost:3000')
   });
 
+  it('Should be able to add a new url and it render to the main page', () => {
+    cy.get('form').find('[placeholder="Title..."]').type('test title')
+      .get('form').find('[placeholder="URL to Shorten..."]').type('testURL.com/example/wowzers25387092608731985794')
+      .get('form').find('button').click()
+      .get('section > :nth-child(2)').find('[data-cy=title]').should('contain', 'test title')
+      .get('section > :nth-child(2)').find('[data-cy=short-url]').should('contain', 'http://localhost:3001/useshorturl/2')
+      .get('section > :nth-child(2)').find('[data-cy=long-url]').should('contain', 'https://testURL.com/example/wowzers25387092608731985794')
+  });
 
 });
